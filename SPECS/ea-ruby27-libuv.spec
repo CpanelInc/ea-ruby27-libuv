@@ -1,3 +1,6 @@
+%define debug_package %{nil}
+%define _enable_debug_packages %{nil}
+
 # Defining the package namespace
 %global ns_name ea
 %global ns_dir /opt/cpanel
@@ -18,7 +21,7 @@
 %global sofull %{somajor}.%{sominor}.%{sonano}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 2
+%define release_prefix 3
 
 Name: %{?scl_prefix}libuv
 Epoch:   1
@@ -134,6 +137,9 @@ sed -e "s#@prefix@#%{_prefix}#g" \
 %{_includedir}/uv/*
 
 %changelog
+* Wed May 17 2023 Julian Brown <julian.brown@cpanel.net> - 1.44.2-3
+- ZC-10950: Fix build problems
+
 * Mon May 08 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 1.44.2-2
 - ZC-10936: Clean up Makefile and remove debug-package-nil
 
