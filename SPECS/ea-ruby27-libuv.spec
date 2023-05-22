@@ -37,6 +37,10 @@ BuildRequires: libuv
 
 %if 0%{?rhel} < 8
 BuildRequires: python
+BuildRequires: devtoolset-8-toolchain
+BuildRequires: devtoolset-8-libatomic-devel
+BuildRequires: devtoolset-8-gcc
+BuildRequires: devtoolset-8-gcc-c++
 %else
 BuildRequires: python36
 BuildRequires: platform-python
@@ -78,6 +82,10 @@ Development libraries for libuv
 %setup -q -n %{pkg_name}-v%{version}
 
 %build
+%if 0%{?rhel} < 8
+. /opt/rh/devtoolset-8/enable
+%endif
+
 export CFLAGS='%{optflags}'
 export CXXFLAGS='%{optflags}'
 
