@@ -1,3 +1,6 @@
+%define debug_package %{nil}
+%define _enable_debug_packages %{nil}
+
 # Defining the package namespace
 %global ns_name ea
 %global ns_dir /opt/cpanel
@@ -22,7 +25,7 @@
 
 Name: %{?scl_prefix}libuv
 Epoch:   1
-Version: 1.44.2
+Version: 1.45.0
 Release: %{release_prefix}%{?dist}.cpanel
 Summary: libuv is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -34,6 +37,10 @@ BuildRequires: libuv
 
 %if 0%{?rhel} < 8
 BuildRequires: python
+BuildRequires: devtoolset-8-toolchain
+BuildRequires: devtoolset-8-libatomic-devel
+BuildRequires: devtoolset-8-gcc
+BuildRequires: devtoolset-8-gcc-c++
 %else
 BuildRequires: python36
 BuildRequires: platform-python
@@ -75,6 +82,10 @@ Development libraries for libuv
 %setup -q -n %{pkg_name}-v%{version}
 
 %build
+%if 0%{?rhel} < 8
+. /opt/rh/devtoolset-8/enable
+%endif
+
 export CFLAGS='%{optflags}'
 export CXXFLAGS='%{optflags}'
 
@@ -134,6 +145,15 @@ sed -e "s#@prefix@#%{_prefix}#g" \
 %{_includedir}/uv/*
 
 %changelog
+* Mon May 22 2023 Cory McIntire <cory@cpanel.net> - 1.45.0-1
+- EA-11427: Update ea-ruby27-libuv from v1.44.2 to v1.45.0
+
+* Wed May 17 2023 Julian Brown <julian.brown@cpanel.net> - 1.44.2-3
+- ZC-10950: Fix build problems
+
+* Mon May 08 2023 Brian Mendoza <brian.mendoza@cpanel.net> - 1.44.2-2
+- ZC-10936: Clean up Makefile and remove debug-package-nil
+
 * Tue Jul 12 2022 Cory McIntire <cory@cpanel.net> - 1.44.2-1
 - EA-10826: Update ea-ruby27-libuv from v1.44.1 to v1.44.2
 
