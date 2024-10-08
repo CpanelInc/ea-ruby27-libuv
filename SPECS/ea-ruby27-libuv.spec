@@ -21,7 +21,7 @@
 %global sofull %{somajor}.%{sominor}.%{sonano}
 
 # Doing release_prefix this way for Release allows for OBS-proof versioning, See EA-4590 for more details
-%define release_prefix 1
+%define release_prefix 3
 
 Name: %{?scl_prefix}libuv
 Epoch:   1
@@ -54,7 +54,7 @@ BuildRequires: scl-utils-build
 %{?scl:BuildRequires: %{scl}-runtime}
 
 URL: http://libuv.org/
-Source0: http://dist.libuv.org/dist/v%{version}/libuv-v%{version}.tar.gz
+Source0: http://dist.libuv.org/dist/v%{version}/libuv-v1.48.0.tar.gz
 Source2: libuv.pc.in
 
 %{?scl:BuildRequires: %{?scl}-runtime}
@@ -79,7 +79,7 @@ Requires(postun): /sbin/ldconfig
 Development libraries for libuv
 
 %prep
-%setup -q -n %{pkg_name}-v%{version}
+%setup -q -n %{pkg_name}-v1.48.0
 
 %build
 %if 0%{?rhel} < 8
@@ -145,6 +145,10 @@ sed -e "s#@prefix@#%{_prefix}#g" \
 %{_includedir}/uv/*
 
 %changelog
+* Tue Oct 08 2024 Cory McIntire <cory@cpanel.net> - 1.49.0-2
+- EA-12450: Rolling “ea-ruby27-libuv” back to “757c822adb9bc99291dfd5219b5afa32e63e1fd4”: upstream issue causing upload limit problems
+- Actual version is 1.48.0-3
+
 * Fri Sep 27 2024 Cory McIntire <cory@cpanel.net> - 1.49.0-1
 - EA-12429: Update ea-ruby27-libuv from v1.48.0 to v1.49.0
 
