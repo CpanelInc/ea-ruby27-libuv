@@ -54,7 +54,7 @@ BuildRequires: scl-utils-build
 %{?scl:BuildRequires: %{scl}-runtime}
 
 URL: http://libuv.org/
-Source0: http://dist.libuv.org/dist/v%{version}/libuv-v%{version}.tar.gz
+Source0: http://dist.libuv.org/dist/v%{version}/libuv-v1.48.0.tar.gz
 Source2: libuv.pc.in
 
 %{?scl:BuildRequires: %{?scl}-runtime}
@@ -79,7 +79,7 @@ Requires(postun): /sbin/ldconfig
 Development libraries for libuv
 
 %prep
-%setup -q -n %{pkg_name}-v%{version}
+%setup -q -n %{pkg_name}-v1.48.0
 
 %build
 %if 0%{?rhel} < 8
