@@ -25,7 +25,7 @@
 
 Name: %{?scl_prefix}libuv
 Epoch:   1
-Version: 1.50.0
+Version: 1.51.0
 Release: %{release_prefix}%{?dist}.cpanel
 Summary: libuv is a multi-platform support library with a focus on asynchronous I/O.
 
@@ -54,7 +54,7 @@ BuildRequires: scl-utils-build
 %{?scl:BuildRequires: %{scl}-runtime}
 
 URL: http://libuv.org/
-Source0: http://dist.libuv.org/dist/v%{version}/libuv-v1.50.0.tar.gz
+Source0: http://dist.libuv.org/dist/v%{version}/libuv-v%{version}.tar.gz
 Source2: libuv.pc.in
 
 %{?scl:BuildRequires: %{?scl}-runtime}
@@ -79,7 +79,7 @@ Requires(postun): /sbin/ldconfig
 Development libraries for libuv
 
 %prep
-%setup -q -n %{pkg_name}-v1.50.0
+%setup -q -n %{pkg_name}-v%{version}
 
 %build
 %if 0%{?rhel} < 8
@@ -145,6 +145,9 @@ sed -e "s#@prefix@#%{_prefix}#g" \
 %{_includedir}/uv/*
 
 %changelog
+* Fri Apr 25 2025 Cory McIntire <cory.mcintire@webpros.com> - 1.51.0-1
+- EA-12835: Update ea-ruby27-libuv from v1.50.0 to v1.51.0
+
 * Wed Feb 05 2025 Cory McIntire <cory.mcintire@webpros.com> - 1.50.0-1
 - EA-12684: Update ea-ruby27-libuv from v1.48.0 to v1.50.0
 
